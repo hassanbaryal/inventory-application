@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const carInstanceSchema = new Schema({
   car: { type: Schema.Types.ObjectId, ref: 'Car' },
-  description: { type: String, maxLength: 250 },
+  description: { type: String, maxLength: 1000 },
   price: { type: Number, required: true, min: 0 },
   condition: {
     type: String,
