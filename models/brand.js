@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const brandSchema = new Schema({
   name: { type: String, required: true, maxLength: 100 },
-  description: { type: String, required: true, minLength: 3, maxLength: 250 },
+  description: { type: String, required: true, minLength: 3, maxLength: 1000 },
 });
 
 brandSchema.virtual('url').get(function () {
