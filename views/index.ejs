@@ -1,11 +1,30 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<%- include('layout') -%>
+
+<h1><%= title %></h1>
+<p>Welcome to the inventory management app for cars! This is a simple application that allows you to store information about cars, brands, and car types (e.g. sedans, SUV's, etc.) This application has already been filled with sample data. To start, click on any of the links in the navigation bar above!</p>
+
+<h2>Current Inventory: </h2>
+
+<ul>
+  <li>
+    <strong>Cars: </strong>
+    <%= car_count %>
+  </li>
+  <li>
+    <strong>Brands: </strong>
+    <%= brand_count %>
+  </li>
+  <li>
+    <strong>Car Instances (total units): </strong>
+    <%= carinstance_count %>
+  </li>
+  <li>
+    <strong>Car Types: </strong>
+    <%= cartype_count %>
+  </li>
+</ul>
+
+<!-- Below are the closing tages for layout.ejs -->
+</div>
+</body>
 </html>
