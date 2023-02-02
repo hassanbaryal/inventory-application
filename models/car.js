@@ -10,7 +10,7 @@ const carSchema = new Schema({
 });
 
 carSchema.virtual('url').get(function () {
-  return `/catalog/brand/${this._id}`;
+  return `/catalog/car/${this._id}`;
 });
 
 module.exports = mongoose.model('Car', carSchema);
