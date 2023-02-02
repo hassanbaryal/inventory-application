@@ -39,9 +39,18 @@ exports.index = (req, res, next) => {
 
 // Display all cars
 exports.cars_list = (req, res, next) => {
-  res.render('NOT IMPLEMENTED: cars_list, display all cars', {
-    title: 'All Cars',
-  });
+  Car.find()
+    .sort({ name: 1 })
+    .populate(['brand', 'carType'])
+    .exec((err, list) => {
+      if (err) {
+        return next(err);
+      }
+      return res.render('cars', {
+        title: 'All cars',
+        car_list: list,
+      });
+    });
 };
 
 // Display car details
