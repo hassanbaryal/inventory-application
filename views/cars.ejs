@@ -1,0 +1,27 @@
+<%- include('layout') -%>
+
+<h1><%= title %></h1>
+<ul>
+  <% for (const car of car_list) { %>
+    <li>
+      <a href=<%- car.url -%>><%= car.name %></a>
+      <p>
+        <strong>Brand: </strong>
+        <%= car.brand.name %>
+      </p>
+      <p>
+        <strong>Car Type: </strong>
+        <%= car.carType.name %>
+      </p>
+      <p>
+        <strong>Description: </strong>
+        <%= car.description %>
+      </p>
+    </li>
+  <% } %>
+</ul>
+
+<!-- Below are the closing tages for layout.ejs -->
+</div>
+</body>
+</html>
