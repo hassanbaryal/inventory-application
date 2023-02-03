@@ -9,4 +9,7 @@ router.get('/', carController.index);
 // GET all cars page
 router.get('/cars', carController.cars_list);
 
+// GET all cars page
+router.get('/car/:id', carController.car_details);
+
 module.exports = router;
