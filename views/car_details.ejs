@@ -1,0 +1,39 @@
+<%- include('layout') -%>
+
+<h1><%= title %></h1>
+<p>
+  <strong>Brand: </strong>
+  <%= car_details.brand.name %>
+</p>
+<p>
+  <strong>Car Type: </strong>
+  <%= car_details.carType.name %>
+</p>
+<p>
+  <strong>Description: </strong>
+  <%= car_details.description %>
+</p>
+<p><Strong>Units:</Strong></p>
+<ul>
+  <% if (car_instances.length !== 0) { %>
+    <% for (const car of car_instances) { %>
+      <li>
+        <a href=<%- car.url -%>><%= car._id %></a>
+        <% if (car.condition === 'New') { %>
+        <span class="text-success"><%= car.condition %></span>
+        <% } else { %>
+          <span class="text-warning"><%= car.condition %></span>  
+        <% } %>
+      </li>
+    <% } %>
+  <% } else { %>
+    <li>
+      No units found!
+    </li>
+  <% } %>
+</ul>
+
+<!-- Below are the closing tages for layout.ejs -->
+</div>
+</body>
+</html>
