@@ -54,9 +54,34 @@ exports.cars_list = (req, res, next) => {
 
 // Display car details
 exports.car_details = (req, res, next) => {
-  res.render('NOT IMPLEMENTED: ', {
-    title: 'Car Details',
-  });
+  async.parallel(
+    {
+      car(cb) {
+        Car.findById(req.params.id).populate(['brand', 'carType']).exec(cb);
+      },
+      car_instances(cb) {
+        console.log(req.params.id);
+        CarInstance.find({ car: req.params.id }).exec(cb);
+      },
+    },
+    (err, results) => {
+      if (err) {
+        return next(err);
+      }
+
+      if (results.car === null) {
+        const newErr = new Error('Book not found');
+        newErr.status = 404;
+        return next(err);
+      }
+      console.log(results.car_instances);
+      return res.render('car_details', {
+        title: results.car.name,
+        car_details: results.car,
+        car_instances: results.car_instances,
+      });
+    }
+  );
 };
 
 // Display new car form
