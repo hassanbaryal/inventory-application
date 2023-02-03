@@ -60,7 +60,6 @@ exports.car_details = (req, res, next) => {
         Car.findById(req.params.id).populate(['brand', 'carType']).exec(cb);
       },
       car_instances(cb) {
-        console.log(req.params.id);
         CarInstance.find({ car: req.params.id }).exec(cb);
       },
     },
@@ -74,7 +73,7 @@ exports.car_details = (req, res, next) => {
         newErr.status = 404;
         return next(err);
       }
-      console.log(results.car_instances);
+      
       return res.render('car_details', {
         title: results.car.name,
         car_details: results.car,
