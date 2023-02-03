@@ -39,9 +39,8 @@ exports.index = (req, res, next) => {
 
 // Display all cars
 exports.cars_list = (req, res, next) => {
-  Car.find()
+  Car.find({}, { name: 1 })
     .sort({ name: 1 })
-    .populate(['brand', 'carType'])
     .exec((err, list) => {
       if (err) {
         return next(err);
