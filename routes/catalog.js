@@ -1,6 +1,7 @@
 const express = require('express');
 const carController = require('../controllers/carController');
 const carInstanceController = require('../controllers/carInstanceController');
+const brandController = require('../controllers/brandController');
 
 const router = express.Router();
 
@@ -17,5 +18,10 @@ router.get('/car/:id', carController.car_details);
 
 // GET car instance detail page
 router.get('/carinstance/:id', carInstanceController.carinstance_details);
+
+/* BRAND ROUTES */
+
+// GET all brands page
+router.get('/brands', brandController.all_brands);
 
 module.exports = router;

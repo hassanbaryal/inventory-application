@@ -1,0 +1,15 @@
+<%- include('layout') -%>
+
+<h1><%= title %></h1>
+<ul>
+  <% for (const brand of list_brands) { %>
+    <li>
+      <a href=<%- brand.url -%>><%= brand.name %></a>
+    </li>
+  <% } %>
+</ul>
+
+<!-- Below are the closing tages for layout.ejs -->
+</div>
+</body>
+</html>
