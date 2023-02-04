@@ -33,4 +33,7 @@ router.get('/brand/:id', brandController.brand_details);
 // GET all car types
 router.get('/cartypes', carTypeController.cartypes_list);
 
+// GET car type details
+router.get('/cartype/:id', carTypeController.cartype_details);
+
 module.exports = router;
