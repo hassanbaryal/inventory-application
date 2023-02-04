@@ -1,0 +1,15 @@
+<%- include('layout') -%>
+
+<h1><%= title %></h1>
+<ul>
+  <% for (const cartype of cartypes) { %>
+    <li>
+      <a href=<%- cartype.url -%>><%= cartype.name %></a>
+    </li>
+  <% } %>
+</ul>
+
+<!-- Below are the closing tages for layout.ejs -->
+</div>
+</body>
+</html>

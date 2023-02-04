@@ -2,6 +2,7 @@ const express = require('express');
 const carController = require('../controllers/carController');
 const carInstanceController = require('../controllers/carInstanceController');
 const brandController = require('../controllers/brandController');
+const carTypeController = require('../controllers/carTypeController');
 
 const router = express.Router();
 
@@ -26,5 +27,10 @@ router.get('/brands', brandController.all_brands);
 
 // GET brand details page
 router.get('/brand/:id', brandController.brand_details);
+
+/* CAR TYPE ROUTES */
+
+// GET all car types
+router.get('/cartypes', carTypeController.cartypes_list);
 
 module.exports = router;
