@@ -1,0 +1,26 @@
+<%- include('layout') -%>
+
+<h1><%= title %></h1>
+<p>
+  <strong>Description: </strong>
+  <%= brand.description %>
+</p>
+<p><Strong>Cars:</Strong></p>
+<ul>
+  <% if (associated_cars.length > 0) { %>
+    <% for (const car of associated_cars) { %>
+      <li>
+        <a href=<%- car.url -%>><%= car.name %></a>
+      </li>
+    <% } %>
+  <% } else { %>
+    <li>
+      No Cars found!
+    </li>
+  <% } %>
+</ul>
+
+<!-- Below are the closing tages for layout.ejs -->
+</div>
+</body>
+</html>

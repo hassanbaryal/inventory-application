@@ -24,4 +24,7 @@ router.get('/carinstance/:id', carInstanceController.carinstance_details);
 // GET all brands page
 router.get('/brands', brandController.all_brands);
 
+// GET brand details page
+router.get('/brand/:id', brandController.brand_details);
+
 module.exports = router;
