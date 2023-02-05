@@ -1,0 +1,23 @@
+<%- include('layout') -%>
+
+<h1><%= title %></h1>
+
+<form method="POST" action="">
+  <div class="mb-3">
+    <label for="name" class="form-label">Car Type Name</label>
+    <input type="text" class="form-control" name="name" id="name" value=<%- cartype === null ? '' : cartype.name -%>>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <% if (errors) { %>
+  <ul>
+    <% for (const error of errors) { %>
+      <li><%= error.msg %></li>
+    <% } %>
+  </ul>
+  <% } %>
+</form>
+
+<!-- Below are the closing tages for layout.ejs -->
+</div>
+</body>
+</html>

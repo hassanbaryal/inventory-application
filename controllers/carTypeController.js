@@ -47,3 +47,11 @@ exports.cartype_details = (req, res, next) => {
     }
   );
 };
+
+exports.cartype_create_get = (req, res) => {
+  res.render('cartype_form', {
+    title: 'Create Car Type',
+    cartype: null,
+    errors: null,
+  });
+};
