@@ -82,16 +82,38 @@ exports.brand_create_post = [
         errors: errors.array(),
       });
     }
-    // No errors, create new brand document
-    const brand = new Brand({
-      name: req.body.name,
-      description: req.body.description,
-    });
-    // Save document to database
-    return brand.save((err) => {
-      if (err) return next(err);
-      // Redirect user to new brand detail page
-      return res.redirect(brand.url);
-    });
+
+    async.series(
+      {
+        duplicates(cb) {
+          Brand.find({ name: req.body.name }).exec(cb);
+        },
+      },
+      (err, results) => {
+        if (err) {
+          return next(err);
+        }
+        if (results.duplicates.length > 0) {
+          res.render('brand_form', {
+            title: 'Create Brand',
+            brand: req.body,
+            errors: [{ msg: 'Brand already exists!' }],
+          });
+        } else {
+          // No errors, create new brand document
+          const brand = new Brand({
+            name: req.body.name,
+            description: req.body.description,
+          });
+          // Save document to database
+          return brand.save((error) => {
+            if (error) return next(error);
+            // Redirect user to new brand detail page
+            return res.redirect(brand.url);
+          });
+        }
+        return null;
+      }
+    );
   },
 ];
