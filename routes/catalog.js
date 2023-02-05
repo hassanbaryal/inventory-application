@@ -28,7 +28,11 @@ router.get('/brands', brandController.all_brands);
 // GET brand details page
 router.get('/brand/:id', brandController.brand_details);
 
+// GET create new brand form page
 router.get('/create/brand', brandController.create_brand_form);
+
+// POST new brand
+router.post('/create/brand', brandController.brand_create_post);
 
 /* CAR TYPE ROUTES */
 
