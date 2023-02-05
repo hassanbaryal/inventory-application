@@ -5,13 +5,20 @@
 <form method="POST" action="">
   <div class="mb-3">
     <label for="name" class="form-label">Brand Name</label>
-    <input type="text" class="form-control" name="name" id="name">
+    <input type="text" class="form-control" name="name" id="name" value=<%- brand === null ? '' : brand.name -%>>
   </div>
   <div class="mb-3">
     <label for="description" class="form-label">Description</label>
-    <textarea class="form-control" name="description" id="description" cols="30" rows="10"></textarea>
+    <textarea class="form-control" name="description" id="description" cols="30" rows="10" value=<%- brand === null ? '' : brand.description-%>></textarea>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
+  <% if (errors) { %>
+  <ul>
+    <% for (const error of errors) { %>
+      <li><%= error.msg %></li>
+    <% } %>
+  </ul>
+  <% } %>
 </form>
 
 <!-- Below are the closing tages for layout.ejs -->
