@@ -47,3 +47,9 @@ exports.brand_details = (req, res, next) => {
     }
   );
 };
+
+exports.create_brand_form = (req, res) => {
+  res.render('brand_form', {
+    title: 'Create Brand',
+  });
+};
