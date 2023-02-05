@@ -1,3 +1,4 @@
+const { body, validationResult } = require('express-validator');
 const async = require('async');
 const CarType = require('../models/carType');
 const Car = require('../models/car');
@@ -48,6 +49,7 @@ exports.cartype_details = (req, res, next) => {
   );
 };
 
+// Display cartype form on GET
 exports.cartype_create_get = (req, res) => {
   res.render('cartype_form', {
     title: 'Create Car Type',
@@ -55,3 +57,54 @@ exports.cartype_create_get = (req, res) => {
     errors: null,
   });
 };
+
+// Create new car type on POST
+exports.cartype_create_post = [
+  body('name')
+    .trim()
+    .isLength({ min: 1 })
+    .escape()
+    .withMessage('Car Type Name required'),
+  (req, res, next) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      res.render('cartype_form', {
+        title: 'Create Car Type',
+        cartype: req.body,
+        errors: errors.array(),
+      });
+    }
+
+    async.series(
+      {
+        duplicates(cb) {
+          CarType.find({ name: req.body.name }).exec(cb);
+        },
+      },
+      (err, results) => {
+        if (err) {
+          return next(err);
+        }
+
+        if (results.duplicates.length > 0) {
+          res.render('cartype_form', {
+            title: 'Create Car Type',
+            cartype: req.body,
+            errors: [{ msg: 'Car type already exists!' }],
+          });
+        } else {
+          const carType = new CarType({
+            name: req.body.name,
+          });
+
+          carType.save((error) => {
+            if (error) return next(error);
+            return res.redirect(carType.url);
+          });
+        }
+        return null;
+      }
+    );
+  },
+];

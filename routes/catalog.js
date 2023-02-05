@@ -45,4 +45,7 @@ router.get('/cartype/:id', carTypeController.cartype_details);
 // GET create new car type form page
 router.get('/create/cartype', carTypeController.cartype_create_get);
 
+// POST new car type
+router.post('/create/cartype', carTypeController.cartype_create_post);
+
 module.exports = router;
