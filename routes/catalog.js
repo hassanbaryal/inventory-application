@@ -9,11 +9,16 @@ const router = express.Router();
 /* GET home page. */
 router.get('/', carController.index);
 
+/* CAR ROUTES */
+
 // GET all cars page
 router.get('/cars', carController.cars_list);
 
 // GET car detail page
 router.get('/car/:id', carController.car_details);
+
+// GET new car form
+router.get('/create/car', carController.create_car_get);
 
 /* CAR INSTANCE ROUTES */
 

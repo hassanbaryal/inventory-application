@@ -1,0 +1,61 @@
+<%- include('layout') -%>
+
+<h1><%= title %></h1>
+
+<form method="POST" action="">
+  <div class="mb-3">
+    <label for="name" class="form-label">Car Name</label>
+    <input type="text" class="form-control" name="name" id="name" value=<%- car === null ? '' : car.name -%>>
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea class="form-control" name="description" id="description" cols="30" rows="10" value=<%- car === null ? '' : car.description-%>></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="brand">Brand</label>
+    <select class="form-select form-select-lg mb-3" name="brand" id="brand">
+      <option value="">Select</option>
+      <% if (brands.length > 0) { %>
+        <% for (const brand of brands) { %>
+          <% if (car !== null && car.brand === brand._id) { %>
+            <option value=<%- brand._id -%> selected><%= brand.name %></option>
+          <% } else { %>
+            <option value=<%- brand._id -%>><%= brand.name %></option>
+          <% } %>
+        <% } %>
+      <% } else { %>
+        <option value="">No brands found! Please create a brand before continuing</option>
+      <% } %>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="cartype">Car Type</label>
+    <select class="form-select form-select-lg mb-3" name="cartype" id="cartype">
+      <option value="">Select</option>
+      <% if (cartypes.length > 0) { %>
+        <% for (const cartype of cartypes) { %>
+          <% if (car !== null && car.cartype === cartype._id) { %>
+            <option value=<%- cartype._id -%> selected><%= cartype.name %></option>
+          <% } else { %>
+            <option value=<%- cartype._id -%>><%= cartype.name %></option>
+          <% } %>
+        <% } %>
+      <% } else { %>
+        <option value="">No car types found! Please create a car type before continuing</option>
+      <% } %>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <% if (errors) { %>
+  <ul>
+    <% for (const error of errors) { %>
+      <li><%= error.msg %></li>
+    <% } %>
+  </ul>
+  <% } %>
+</form>
+
+<!-- Below are the closing tages for layout.ejs -->
+</div>
+</body>
+</html>

@@ -73,7 +73,7 @@ exports.car_details = (req, res, next) => {
         newErr.status = 404;
         return next(err);
       }
-      
+
       return res.render('car_details', {
         title: results.car.name,
         car_details: results.car,
@@ -84,8 +84,25 @@ exports.car_details = (req, res, next) => {
 };
 
 // Display new car form
-exports.create_car = (req, res, next) => {
-  res.render('NOT IMPLEMENTED: new_car_form', {
-    title: 'Create new car',
-  });
+exports.create_car_get = (req, res, next) => {
+  async.parallel(
+    {
+      brands(cb) {
+        Brand.find({}, 'name').sort({ name: 1 }).exec(cb);
+      },
+      cartypes(cb) {
+        CarType.find({}, 'name').sort({ name: 1 }).exec(cb);
+      },
+    },
+    (err, results) => {
+      if (err) return next(err);
+      return res.render('car_form', {
+        title: 'Create new car',
+        car: null,
+        brands: results.brands,
+        cartypes: results.cartypes,
+        errors: null,
+      });
+    }
+  );
 };
