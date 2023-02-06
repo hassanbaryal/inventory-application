@@ -23,17 +23,17 @@
   
   <div class="mb-3">
     <label for="price">Price</label>
-    <input class="form-control" type="number" name="price" id="price">
+    <input class="form-control" type="number" name="price" id="price" value=<%- carinstance === null ? '' : carinstance.price -%>>
   </div>
   <div class="mb-3">
     <label for="year">Year</label>
-    <input class="form-control" type="number" name="year" id="year">
+    <input class="form-control" type="number" name="year" id="year" value=<%- carinstance === null ? '' : carinstance.year -%>>
   </div>
   
 
   <div class="mb-3">
-    <label for="car">Condition</label>
-    <select class="form-select form-select-lg mb-3" name="car" id="car">
+    <label for="condition">Condition</label>
+    <select class="form-select form-select-lg mb-3" name="condition" id="condition">
       <option value="">Select</option>
       <option value="New">New</option>
       <option value="Used">Used</option>
