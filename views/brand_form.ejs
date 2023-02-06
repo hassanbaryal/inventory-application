@@ -9,7 +9,7 @@
   </div>
   <div class="mb-3">
     <label for="description" class="form-label">Description</label>
-    <textarea class="form-control" name="description" id="description" cols="30" rows="10" value=<%- brand === null ? '' : brand.description-%>></textarea>
+    <textarea class="form-control" name="description" id="description" cols="30" rows="10"><%= brand === null ? '' : brand.description%></textarea>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
   <% if (errors) { %>
