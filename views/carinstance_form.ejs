@@ -1,0 +1,51 @@
+<%- include('layout') -%>
+
+<h1><%= title %></h1>
+
+<form method="POST" action="">
+  <div class="mb-3">
+    <label for="car">Car</label>
+    <select class="form-select form-select-lg mb-3" name="car" id="car">
+      <option value="">Select</option>
+      <% if (cars.length > 0) { %>
+        <% for (const car of cars) { %>
+          <option value=<%- car._id -%> ><%= car.name %></option>
+        <% } %>
+      <% } else { %>
+        <option value="">No cars found! Please create a car before continuing</option>
+      <% } %>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea class="form-control" name="description" id="description" cols="30" rows="10"><%= carinstance === null ? '' : carinstance.description %></textarea>
+  </div>
+  
+  <div class="mb-3">
+    <label for="price">Price</label>
+    <input type="number" name="price" id="price">
+  </div>
+  
+
+  <div class="mb-3">
+    <label for="car">Condition</label>
+    <select class="form-select form-select-lg mb-3" name="car" id="car">
+      <option value="">Select</option>
+      <option value="New">New</option>
+      <option value="Used">Used</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <% if (errors) { %>
+  <ul>
+    <% for (const error of errors) { %>
+      <li><%= error.msg %></li>
+    <% } %>
+  </ul>
+  <% } %>
+</form>
+
+<!-- Below are the closing tages for layout.ejs -->
+</div>
+</body>
+</html>

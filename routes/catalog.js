@@ -28,6 +28,9 @@ router.post('/create/car', carController.create_car_post);
 // GET car instance detail page
 router.get('/carinstance/:id', carInstanceController.carinstance_details);
 
+router.get('/create/carinstance', carInstanceController.create_carinstance_form)
+
+
 /* BRAND ROUTES */
 
 // GET all brands page
