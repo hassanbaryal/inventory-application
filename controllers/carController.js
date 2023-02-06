@@ -1,4 +1,5 @@
 const async = require('async');
+const { body, validationResult } = require('express-validator');
 const Car = require('../models/car');
 const Brand = require('../models/brand');
 const CarInstance = require('../models/carInstance');
@@ -106,3 +107,82 @@ exports.create_car_get = (req, res, next) => {
     }
   );
 };
+
+// POST new car
+exports.create_car_post = [
+  body('name')
+    .trim()
+    .isLength({ min: 1, max: 100 })
+    .escape()
+    .withMessage('Car name required'),
+  body('description')
+    .trim()
+    .isLength({ min: 1, max: 1000 })
+    .escape()
+    .withMessage('Car description required'),
+  body('brand')
+    .trim()
+    .isLength({ min: 1 })
+    .escape()
+    .withMessage('Brand required'),
+  body('cartype')
+    .trim()
+    .isLength({ min: 1 })
+    .escape()
+    .withMessage('Car type required'),
+  (req, res, next) => {
+    async.parallel(
+      {
+        brands(cb) {
+          Brand.find({}, 'name').sort({ name: 1 }).exec(cb);
+        },
+        cartypes(cb) {
+          CarType.find({}, 'name').sort({ name: 1 }).exec(cb);
+        },
+        duplicates(cb) {
+          Car.find({ name: req.body.name }).exec(cb);
+        },
+      },
+      (err, results) => {
+        if (err) return next(err);
+
+        const errors = validationResult(req);
+        console.log('DESCRIPTION', req.body.description);
+        if (!errors.isEmpty()) {
+          // There are errors, render form again with sanitized values and error messages
+          return res.render('car_form', {
+            title: 'Create new car',
+            car: req.body,
+            brands: results.brands,
+            cartypes: results.cartypes,
+            errors: errors.array(),
+          });
+        }
+
+        if (results.duplicates.length > 0) {
+          return res.render('car_form', {
+            title: 'Create new car',
+            car: req.body,
+            brands: results.brands,
+            cartypes: results.cartypes,
+            errors: [{ msg: 'Car already exists!' }],
+          });
+        }
+
+        // No errors, create new brand document
+        const car = new Car({
+          name: req.body.name,
+          description: req.body.description,
+          brand: req.body.brand,
+          carType: req.body.cartype,
+        });
+        // Save document to database
+        return car.save((error) => {
+          if (error) return next(error);
+          // Redirect user to new brand detail page
+          return res.redirect(car.url);
+        });
+      }
+    );
+  },
+];
