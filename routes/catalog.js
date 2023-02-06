@@ -20,6 +20,9 @@ router.get('/car/:id', carController.car_details);
 // GET new car form
 router.get('/create/car', carController.create_car_get);
 
+// POST new car
+router.post('/create/car', carController.create_car_post);
+
 /* CAR INSTANCE ROUTES */
 
 // GET car instance detail page
