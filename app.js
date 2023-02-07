@@ -13,9 +13,11 @@ const catalogRouter = require('./routes/catalog');
 
 const app = express();
 
-mongoose.set('strictQuery', false);
-const mongoDB =
+const dev_db_url =
   'mongodb+srv://associate-developer:Adev-1234@cluster0.mfpqnkb.mongodb.net/inventory_app?retryWrites=true&w=majority';
+
+mongoose.set('strictQuery', false);
+const mongoDB = process.env.MONGODB_URI || dev_db_url;
 async function main() {
   await mongoose.connect(mongoDB);
 }
