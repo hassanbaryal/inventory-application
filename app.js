@@ -4,6 +4,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
+const compression = require('compression');
+const helmet = require('helmet');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -20,6 +22,9 @@ async function main() {
 main().catch((err) => {
   throw new Error(err);
 });
+
+app.use(compression());
+app.use(helmet());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
