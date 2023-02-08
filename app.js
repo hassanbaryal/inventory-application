@@ -6,6 +6,7 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const compression = require('compression');
 const helmet = require('helmet');
+require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -13,11 +14,9 @@ const catalogRouter = require('./routes/catalog');
 
 const app = express();
 
-const dev_db_url =
-  'mongodb+srv://associate-developer:Adev-1234@cluster0.mfpqnkb.mongodb.net/inventory_app?retryWrites=true&w=majority';
 
 mongoose.set('strictQuery', false);
-const mongoDB = process.env.MONGODB_URI || dev_db_url;
+const mongoDB = process.env.MONGODB_URI || process.env.DEV_DB_URL;
 async function main() {
   await mongoose.connect(mongoDB);
 }
