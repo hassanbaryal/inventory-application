@@ -26,7 +26,16 @@ main().catch((err) => {
 });
 
 app.use(compression());
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      useDefaults: true,
+      directives: {
+        'script-src': ["'self'", 'cdn.jsdelivr.net'],
+      },
+    },
+  })
+);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
